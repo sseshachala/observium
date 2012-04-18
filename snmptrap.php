@@ -1,6 +1,17 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * Observium Network Management and Monitoring System
+ *
+ * @package    observium
+ * @subpackage snmptraps
+ * @author     Adam Armstrong <adama@memetic.org>
+ * @copyright  (C) 2006 - 2012 Adam Armstrong
+ * @license    http://gnu.org/copyleft/gpl.html GNU GPL
+ *
+ */
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('log_errors', 1);

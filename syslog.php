@@ -2,14 +2,12 @@
 <?php
 
 /**
- * Observium
- *
- *   This file is part of Observium.
+ * Observium Network Management and Monitoring System
  *
  * @package    observium
  * @subpackage syslog
  * @author     Adam Armstrong <adama@memetic.org>
- * @copyright  (C) 2006 - 2011 Adam Armstrong
+ * @copyright  (C) 2006 - 2012 Adam Armstrong
  * @license    http://gnu.org/copyleft/gpl.html GNU GPL
  *
  */

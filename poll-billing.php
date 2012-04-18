@@ -1,17 +1,32 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * Observium Network Management and Monitoring System
+ *
+ * @package    obserium
+ * @subpackage billing
+ * @author     Adam Armstrong <adama@memetic.org>
+ * @copyright  (C) 2006 - 2012 Adam Armstrong
+ * @license    http://gnu.org/copyleft/gpl.html GNU GPL
+ *
+ */
+
 chdir(dirname($argv[0]));
 
 include("includes/defaults.inc.php");
 include("config.php");
 include("includes/functions.php");
 
+$options = getopt("d");
+
+if (isset($options['d'])) { $debug = TRUE; }
+
 $iter = "0";
 
 rrdtool_pipe_open($rrd_process, $rrd_pipes);
 
-echo("Starting Polling Session ... \n\n");
+echo("Observium Billing Poller v".$config['version']."\n\n");
 
 foreach (dbFetchRows("SELECT * FROM `bills`") as $bill_data)
 {
@@ -45,11 +60,26 @@ function CollectData($bill_id)
 
     $now = dbFetchCell("SELECT NOW()");
 
-    $last_data = getLastPortCounter($port_id,in);
-    if ($last_data['state'] == "ok")
+    if($debug)
     {
-      $port_data['last_in_measurement'] = $last_data[counter];
-      $port_data['last_in_delta'] = $last_data[delta];
+      echo("Current at:".$now." In:".$port_data['in_measurement']." Out:".$port_data['out_measurement']."\n");
+    }
+    
+    $last_in  = getLastPortCounter($port_id,in);
+    $last_out = getLastPortCounter($port_id,out);
+    $last_bill = getLastMeasurement($bill_id);
+
+    if($debug)
+    {
+      print_r($last_in);
+      print_r($last_out);
+      print_r($last_bill);
+    }
+
+    if ($last_in['state'] == "ok")
+    {
+      $port_data['last_in_measurement'] = $last_in[counter];
+      $port_data['last_in_delta'] = $last_in[delta];
       if ($port_data['in_measurement'] > $port_data['last_in_measurement'])
       {
         $port_data['in_delta'] = $port_data['in_measurement'] - $port_data['last_in_measurement'];
@@ -61,11 +91,10 @@ function CollectData($bill_id)
     }
     dbInsert(array('port_id' => $port_id, 'timestamp' => $now, 'counter' => $port_data['in_measurement'], 'delta' => $port_data['in_delta']), 'port_in_measurements');
 
-    $last_data = getLastPortCounter($port_id,out);
-    if ($last_data[state] == "ok")
+    if ($last_out[state] == "ok")
     {
-      $port_data['last_out_measurement'] = $last_data[counter];
-      $port_data['last_out_delta'] = $last_data[delta];
+      $port_data['last_out_measurement'] = $last_out[counter];
+      $port_data['last_out_delta'] = $last_out[delta];
       if ($port_data['out_measurement'] > $port_data['last_out_measurement'])
       {
         $port_data['out_delta'] = $port_data['out_measurement'] - $port_data['last_out_measurement'];
@@ -82,14 +111,13 @@ function CollectData($bill_id)
     $out_delta = $out_delta + $port_data['out_delta'];
 
   }
-  $last_data = getLastMeasurement($bill_id);
 
-  if ($last_data[state] == "ok")
+  if ($last_bill[state] == "ok")
   {
-    $prev_delta     = $last_data[delta];
-    $prev_in_delta  = $last_data[in_delta];
-    $prev_out_delta = $last_data[out_delta];
-    $prev_timestamp = $last_data[timestamp];
+    $prev_delta     = $last_bill[delta];
+    $prev_in_delta  = $last_bill[in_delta];
+    $prev_out_delta = $last_bill[out_delta];
+    $prev_timestamp = $last_bill[timestamp];
     $period = dbFetchCell("SELECT UNIX_TIMESTAMP(CURRENT_TIMESTAMP()) - UNIX_TIMESTAMP('".mres($prev_timestamp)."')");
   } else {
     $prev_delta = '0';
@@ -98,6 +126,7 @@ function CollectData($bill_id)
     $prev_out_delta =  '0';
   }
 
+  ## Hack. If the counters have gone backwards, we assume the delta is the same as the previous.
   if ($delta < '0')
   {
     $delta = $prev_delta;

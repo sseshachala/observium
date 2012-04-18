@@ -1,20 +1,7 @@
 <?php
 /*
-dbFacile - A Database API that should have existed from the start
-Version 0.4.3
-
-This code is covered by the MIT license http://en.wikipedia.org/wiki/MIT_License
-
-By Alan Szlosek from http://www.greaterscope.net/projects/dbFacile
-
-The non-OO version of dbFacile. It's a bit simplistic, but gives you the
-really useful bits in non-class form.
-
-Usage
- 1. Connect to MySQL as you normally would ... this code uses an existing connection
- 2. Use dbFacile as you normally would, without the object context
- 3. Oh, and dbFetchAll() is now dbFetchRows()
-
+  This code is covered by the MIT license http://en.wikipedia.org/wiki/MIT_License
+  By Alan Szlosek from http://www.greaterscope.net/projects/dbFacile
 */
 
 /*
@@ -24,7 +11,7 @@ Usage
 function dbQuery($sql, $parameters = array()) {
 	global $fullSql, $debug;
 	$fullSql = dbMakeQuery($sql, $parameters);
-        if($debug) { echo("\nSQL[".$fullSql."] "); }
+        if($debug) { echo("SQL[".$fullSql."]\n"); }
 	/*
 	if($this->logFile)
 		$time_start = microtime(true);
