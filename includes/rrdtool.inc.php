@@ -11,8 +11,11 @@
  *
  * See COPYING for more details.
  *
- * @package rrdtool
- * @author Adam Armstrong <adama@memetic.org>
+ * @package    observium
+ * @subpackage rrdtool
+ * @author     Adam Armstrong <adama@memetic.org>
+ * @copyright  (C) 2006 - 2012 Adam Armstrong
+ * @license    http://gnu.org/copyleft/gpl.html GNU GPL
  *
  */
 

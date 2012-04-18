@@ -1,6 +1,7 @@
 <?php
 
 # FIXME not used, do we still need this?
+# Perhaps we graph snom again some day, and we will find this useful? no? no. :>
 
 function callsgraphSNOM ($rrd, $graph, $from, $to, $width, $height, $title, $vertical) {
   global $config;

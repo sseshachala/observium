@@ -1,4 +1,21 @@
 <?php
+
+/**
+ * Observium Network Management and Monitoring System
+ * Copyright (C) 2006-2011, Observium Developers - http://www.observium.org
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * See COPYING for more details.
+ *
+ * @package    observium
+ * @subpackage dbfacile
+ *
+ */
+
 /*
   This code is covered by the MIT license http://en.wikipedia.org/wiki/MIT_License
   By Alan Szlosek from http://www.greaterscope.net/projects/dbFacile
