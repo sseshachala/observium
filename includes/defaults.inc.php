@@ -432,7 +432,6 @@ $config['poller_modules']['bgp-peers']                    = 1;
 $config['poller_modules']['junose-atm-vp']                = 1;
 $config['poller_modules']['toner']                        = 1;
 $config['poller_modules']['ucd-diskio']                   = 1;
-$config['poller_modules']['applications']                 = 1;
 $config['poller_modules']['wifi']                         = 1;
 $config['poller_modules']['ospf']                         = 1;
 $config['poller_modules']['cisco-ipsec-flow-monitor']     = 1;
@@ -446,6 +445,8 @@ $config['poller_modules']['cisco-ace-serverfarms']        = 1;
 $config['poller_modules']['netscaler-vsvr']               = 1;
 $config['poller_modules']['entity-physical']              = 1;
 $config['poller_modules']['unix-agent']                   = 0;
+$config['poller_modules']['applications']                 = 1;
+
 
 ## List of discovery modules. Need to be in this array to be
 ## considered for execution.
