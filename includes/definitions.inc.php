@@ -183,6 +183,12 @@ $config['os'][$os]['type']              = "server";
 $config['os'][$os]['group']             = "unix";
 $config['os'][$os]['text']              = "NexentaOS";
 
+$os = "equallogic";
+$config['os'][$os]['type']              = "storage";
+$config['os'][$os]['group']             = "unix";
+$config['os'][$os]['icon']              = "dell";
+$config['os'][$os]['text']              = "Storage Array Firmware";
+
 // Alcatel
 
 $os = "aos";
@@ -490,6 +496,7 @@ $os = "nos";
 $config['os'][$os]['text']              = "Brocade NOS";
 $config['os'][$os]['type']              = "network";
 $config['os'][$os]['icon']              = "brocade";
+$config['os'][$os]['ifname']            = 1;
 $config['os'][$os]['over'][0]['graph']  = "device_bits";
 $config['os'][$os]['over'][0]['text']   = "Traffic";
 
@@ -931,8 +938,8 @@ $config['os'][$os]['type']              = "environment";
 $config['os'][$os]['over'][0]['graph']  = "device_temperature";
 $config['os'][$os]['over'][0]['text']   = "temperature";
 
-$os = "papouch-tme";
-$config['os'][$os]['text']              = "Papouch TME";
+$os = "papouch";
+$config['os'][$os]['text']              = "Papouch Probe";
 $config['os'][$os]['type']              = "environment";
 $config['os'][$os]['over'][0]['graph']  = "device_temperature";
 $config['os'][$os]['over'][0]['text']   = "temperature";
